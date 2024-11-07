@@ -1,0 +1,32 @@
+import pygame
+
+# Configuração do pygame
+pygame.init() # Inicializa todos os módulos do pygame, permitindo o uso das funcionalidades gráficas e de áudio.
+screen = pygame.display.set_mode((1280, 720))  # Cria a janela do jogo com tamanho 1280x720 pixels
+clock = pygame.time.Clock()  # Cria um relógio para controlar o tempo e limitar os FPS
+running = True  # Variável que controla o loop principal do jogo
+
+while running:
+    # Verifica eventos do sistema
+    # O evento pygame.QUIT ocorre quando o usuário clica no "X" da janela para fechá-la
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:  # Se o evento for de fechar a janela
+            running = False  # Define running como False para sair do loop e fechar o jogo
+
+    # Preenche a tela com uma cor para limpar o que foi desenhado na iteração anterior
+    # Isso evita que restos de gráficos ou desenhos do quadro anterior fiquem visíveis
+    screen.fill("purple")  # Preenche a tela com a cor roxa (pode ser qualquer cor)
+
+    # AQUI VEM O CÓDIGO DE RENDERIZAÇÃO DO SEU JOGO
+    # É aqui que você colocaria a lógica para desenhar os objetos do jogo,
+    # como sprites, imagens, textos ou qualquer outra coisa que precisa ser desenhada na tela.
+
+    # Atualiza a tela e exibe os gráficos renderizados
+    pygame.display.flip()  # Atualiza a tela com o que foi desenhado na iteração atual do loop
+
+    # Limita o número de quadros por segundo (FPS) para 60
+    # Isso ajuda a manter a performance do jogo consistente, evitando que o jogo rode muito rápido
+    clock.tick(60)  # Define a taxa de quadros para 60 FPS (60 quadros por segundo) aqui ele configurou o "relogio" feito la em cima
+
+# Quando o loop termina (quando running é False), o pygame é finalizado
+pygame.quit()  # Finaliza o pygame e fecha todos os recursos usados
