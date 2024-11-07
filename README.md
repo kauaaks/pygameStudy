@@ -1,0 +1,2 @@
+# pygameStudy
+estudos sobre pygame
