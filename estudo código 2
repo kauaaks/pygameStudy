@@ -1,0 +1,46 @@
+import pygame
+
+# Configuração do pygame
+pygame.init()  # Inicializa todos os módulos do pygame, como gráficos e sons
+screen = pygame.display.set_mode((1280, 720))  # Cria a janela do jogo com tamanho 1280x720 pixels
+clock = pygame.time.Clock()  # Cria um relógio para controlar o tempo e limitar a taxa de quadros
+running = True  # Variável que controla o loop principal do jogo
+dt = 0  # Inicializa a variável que irá armazenar o tempo delta
+
+# Definir a posição inicial do "player" (jogador) no centro da tela
+player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+
+while running:
+    # Verifica eventos do sistema
+    # O evento pygame.QUIT ocorre quando o usuário clica no "X" da janela para fechá-la
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:  # Se o evento for de fechar a janela
+            running = False  # Define running como False para sair do loop e fechar o jogo
+
+    # Preenche a tela com uma cor para limpar o que foi desenhado na iteração anterior
+    screen.fill("purple")  # Preenche a tela com a cor roxa (pode ser qualquer cor)
+
+    # Desenha um círculo na posição do jogador (player_pos), com raio de 40 pixels e cor vermelha
+    pygame.draw.circle(screen, "red", player_pos, 40)
+
+    # Obtém o estado atual das teclas pressionadas
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:  # Se a tecla "W" (para cima) for pressionada
+        player_pos.y -= 300 * dt  # Move o jogador para cima, com velocidade proporcional ao tempo
+    if keys[pygame.K_s]:  # Se a tecla "S" (para baixo) for pressionada
+        player_pos.y += 300 * dt  # Move o jogador para baixo
+    if keys[pygame.K_a]:  # Se a tecla "A" (para esquerda) for pressionada
+        player_pos.x -= 300 * dt  # Move o jogador para a esquerda
+    if keys[pygame.K_d]:  # Se a tecla "D" (para direita) for pressionada
+        player_pos.x += 300 * dt  # Move o jogador para a direita
+
+    # Atualiza a tela para mostrar os gráficos renderizados
+    pygame.display.flip()  # Exibe o conteúdo da tela, ou seja, o círculo e a cor de fundo
+
+    # Limita a taxa de quadros do jogo para 60 FPS
+    # dt é o tempo delta, ou seja, o tempo que passou entre os quadros, em segundos
+    # Isso permite que a movimentação do jogador seja independente da taxa de quadros (FPS)
+    dt = clock.tick(60) / 1000  # Atualiza dt com o tempo (em segundos) entre os quadros
+
+# Quando o loop termina (quando running é False), o pygame é finalizado
+pygame.quit()  # Finaliza o pygame e libera os recursos usados
